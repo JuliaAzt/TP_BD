@@ -14,14 +14,11 @@ class Postagens extends CI_Controller { //Nome da classe com letra maiuscula
 	public function index($id ,$slug=null)
 	{	
 		$dados['categorias']=$this->categorias;
-		$this->load->model('publicacoes_model','modelpublicacoes');
+		$this->load->model('Publicacoes_model','modelpublicacoes');
 
 		
 
 		$dados['postagem'] = $this->modelpublicacoes->publicacao($id);
-		
-
-
 		$dados['titulo']= 'Publicação - ';
 		$dados['subtitulo']= '';
 		$dados['subtitulodb']= $this->modelpublicacoes->listar_titulo($id);

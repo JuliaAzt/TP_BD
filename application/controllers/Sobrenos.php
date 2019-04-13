@@ -13,12 +13,13 @@ class Sobrenos extends CI_Controller { //Nome da classe com letra maiuscula
 
 	public function index()
 	{	
-		$dados['categorias']=$this->categorias;
 
-		$dados['autores'] = $this->modelusuarios->listar_autores();
-		$dados['titulo']= 'Sobre Nós - ';
-		$dados['subtitulo']= 'Conheça nossa equipe';
+		//$dados = array(indice => conteudo )
 
+		$dados = array('categorias' => $this->categorias, 
+						'autores' => $this->modelusuarios->listar_autores(), 
+						'titulo' => 'Sobre Nós - ',
+						'subtitulo' =>  'Conheça nossa equipe' );
 
 
 		$this->load->view('frontend/template/html-header', $dados);

@@ -18,7 +18,7 @@ class Home extends CI_Controller { //Nome da classe com letra maiuscula
 		$dados['categorias']=$this->categorias;
 		$dados['titulo']= 'Página Inicial';
 		$dados['subtitulo']= ' - Postagens recentes';
-
+		var_dump($dados);
 
 
 		$this->load->view('frontend/template/html-header', $dados);

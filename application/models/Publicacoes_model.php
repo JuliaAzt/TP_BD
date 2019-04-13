@@ -23,10 +23,11 @@ class Publicacoes_model extends CI_Model { //Nome da classe com letra maiuscula
 		$this->db->select('usuario.id as idautor, usuario.nome, postagens.id, postagens.titulo, postagens.user, postagens.data, postagens.img, postagens.subtitulo');// seleciona colunas de algumas tabelas
 
 		$this->db->from('postagens'); //tira da tabela postagem
-		$this->db->join('usuario', 'usuario.id= postagens.user'); //quando o id do usuario for igual o do banco
+		$this->db->join('usuario', 'usuario.id=' . 'postagens.user'); //quando o id do usuario for igual o do banco
 		$this->db->limit(4);
+
 		$this->db->order_by('data', 'DESC');//coloca em ordem alfabetica as categorias do banco de dados
-		return ($this->db->get()->result()); //retorna as categorias
+		return $this->db->get()->result(); //retorna as categorias
 	}
 
 	public function categorias_pub($id)
@@ -37,7 +38,7 @@ class Publicacoes_model extends CI_Model { //Nome da classe com letra maiuscula
 		$this->db->join('usuario', 'usuario.id= postagens.user'); //quando o id do usuario for igual o do banco
 		$this->db->where('postagens.categoria',$id);
 		$this->db->order_by('data', 'DESC');//coloca em ordem alfabetica as categorias do banco de dados
-		return ($this->db->get()->result()); //retorna as categorias
+		return $this->db->get()->result(); //retorna as categorias
 	}
 
 	public function publicacao($id)
@@ -46,8 +47,8 @@ class Publicacoes_model extends CI_Model { //Nome da classe com letra maiuscula
 
 		$this->db->from('postagens'); //tira da tabela postagem
 		$this->db->join('usuario', 'usuario.id= postagens.user'); //quando o id do usuario for igual o do banco
-		$this->db->where('postagens.id='.$id);
-		return ($this->db->get()->result()); //retorna as categorias
+		$this->db->where('postagens.id',$id);
+		return $this->db->get()->result(); //retorna as categorias
 	}
 
 	public function listar_titulo($id)
