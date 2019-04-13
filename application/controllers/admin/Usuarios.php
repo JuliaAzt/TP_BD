@@ -38,7 +38,8 @@ class Usuarios extends CI_Controller
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('txt-nome', 'Nome do usuário','required');
 		$this->form_validation->set_rules('txt-email', 'E-mail','required|valid_email|is_unique[usuario.email]');
-		$this->form_validation->set_rules('txt-historico', 'Histórico','required');
+		$this->form_validation->set_rules('txt-estado', 'estado','required');
+		$this->form_validation->set_rules('txt-estado', 'cidade','required');
 		$this->form_validation->set_rules('txt-user', 'user','required|is_unique[usuario.user]');
 		$this->form_validation->set_rules('txt-senha', 'senha','required');
 		$this->form_validation->set_rules('txt-confir-senha', ' confirmar senha','required|matches[txt-senha]');
@@ -50,11 +51,12 @@ class Usuarios extends CI_Controller
 		{
 			$nome= $this->input->post('txt-nome');
 			$email= $this->input->post('txt-email');
-			$historico= $this->input->post('txt-historico');
+			$estado= $this->input->post('txt-estado');
+			$cidade= $this->input->post('txt-cidade');
 			$user= $this->input->post('txt-user');
 			$senha= $this->input->post('txt-senha');
 
-			if($this->modelusuarios->adicionar($nome, $email,$historico, $user, $senha))
+			if($this->modelusuarios->adicionar($nome, $email, $user, $senha,$estado,$cidade))
 				redirect(base_url('admin/usuarios'));
 			else
 				echo "Houve um erro no sistema";
@@ -86,7 +88,7 @@ class Usuarios extends CI_Controller
 		$dados['usuarios']=$this->modelusuarios->listar_usuario($id);
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= 'Usuarios';
-
+		
 		$this->load->view('backend/template/html-header', $dados);
 		$this->load->view('backend/template/template');
 		$this->load->view('backend/alterar-usuario');
@@ -105,7 +107,8 @@ class Usuarios extends CI_Controller
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('txt-nome', 'Nome do usuário','required');
 		$this->form_validation->set_rules('txt-email', 'E-mail','required|valid_email');
-		$this->form_validation->set_rules('txt-historico', 'Histórico','required');
+		$this->form_validation->set_rules('txt-estado', 'estado','required');
+		$this->form_validation->set_rules('txt-estado', 'cidade','required');
 		$this->form_validation->set_rules('txt-user', 'user','required');
 		$this->form_validation->set_rules('txt-senha', 'senha','required');
 		$this->form_validation->set_rules('txt-confir-senha', ' confirmar senha','required|matches[txt-senha]');
@@ -121,20 +124,20 @@ class Usuarios extends CI_Controller
 			$id = $this->input->post('txt-id');
 			$nome= $this->input->post('txt-nome');
 			$email= $this->input->post('txt-email');
-			$historico= $this->input->post('txt-historico');
+			$estado= $this->input->post('txt-estado');
+			$cidade= $this->input->post('txt-cidade');
 			$user= $this->input->post('txt-user');
 			$senha= $this->input->post('txt-senha');
 			$id = $this->input->post('txt-id');
 
-			if($this->modelusuarios->alterar($nome, $email,$historico, $user, $senha, $id))
+			if($this->modelusuarios->alterar($nome, $email, $user, $senha, $id, $estado, $cidade))
 				redirect(base_url('admin/usuarios'));
 			else
 				echo "Houve um erro no sistema";
 		}
 	
 	}
-
-
+/*
 	public function nova_foto()
 	{
 		if(!$this->session->userdata('logado'))
@@ -168,7 +171,7 @@ class Usuarios extends CI_Controller
 	}
 
 
-
+*/
 
 	public function pag_login()
 	{

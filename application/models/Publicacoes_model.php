@@ -20,7 +20,7 @@ class Publicacoes_model extends CI_Model { //Nome da classe com letra maiuscula
 
 	public function destaques_home()
 	{
-		$this->db->select('usuario.id as idautor, usuario.nome, postagens.id, postagens.titulo, postagens.user, postagens.data, postagens.img, postagens.subtitulo');// seleciona colunas de algumas tabelas
+		$this->db->select('usuario.id as idautor, usuario.nome, postagens.id, postagens.titulo, postagens.user, postagens.data, postagens.subtitulo');// seleciona colunas de algumas tabelas
 
 		$this->db->from('postagens'); //tira da tabela postagem
 		$this->db->join('usuario', 'usuario.id=' . 'postagens.user'); //quando o id do usuario for igual o do banco
