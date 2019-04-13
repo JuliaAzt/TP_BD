@@ -48,9 +48,21 @@
                                      </div>
 
                                       <div class="form-group">
+                                            <label id="txt-permissaoID">Permissão</label>
+
+                                            <select id="txt-permissaoID" name="txt-permissaoID" class="form-control" >
+                                              <option value="1">Administrador</option>
+                                              <option value="2">Professor</option>
+                                              <option value="3">Aluno</option>
+
+                                            </select>
+                                     </div>
+
+                                      <div class="form-group">
                                             <label id="txt-senha">Senha</label>
                                             <input type="password" id="txt-senha" name="txt-senha" class="form-control" >
                                      </div>
+
 
                                       <div class="form-group">
                                             <label id="txt-confir-senha"> Confirmar Senha</label>

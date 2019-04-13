@@ -43,9 +43,23 @@
                                             <label id="txt-estado">Cidade</label>
                                             <input type="text" id="txt-nome" name="txt-cidade" class="form-control" placeholder="Digite a cidade do usuario" value="<?php echo set_value('txt-cidade');  ?>">
                                      </div>
+                                      <?php if($this->session->userdata('userlogado')->permissaoID==1)  
+                                     { 
+                                     ?>
+                                             <div class="form-group">
+                                                    <label id="txt-permissaoID">Permissão</label>
+                                                        
 
-                                     
-                                     
+                                                    <select id="txt-permissaoID" name="txt-permissaoID" class="form-control" >
+
+                                                      <option value="1" >Administrador</option>
+
+                                                      <option value="2">Professor</option>
+                                                      <option value="3">Aluno</option>
+
+                                                    </select>
+                                             </div>
+                                     <?php } ?>
                                      
                                       <div class="form-group">
                                             <label id="txt-senha">Senha</label>
@@ -72,7 +86,11 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                                <div class="col-lg-6">
+              
+            <?php if($this->session->userdata('userlogado')->permissaoID==1)  
+            { 
+            ?>
+            <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                            <?php echo 'Administrar '.$subtitulo.' Existentes'?>
@@ -106,6 +124,7 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
+                <?php }?>
             </div>
             <!-- /.row -->
         </div>

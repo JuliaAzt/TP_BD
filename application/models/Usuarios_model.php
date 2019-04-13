@@ -26,14 +26,14 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 
 
 	public function listar_autor($id)
-	{	$this->db->select('id,nome, email,user,estado,cidade');
+	{	$this->db->select('id,nome, email,user,estado,cidade,permissaoID');
 		$this->db->from('usuario'); //da tabela categoria
 		$this->db->where('id='.$id); //compara com o id
 		return $this->db->get()->result(); //pega o resultado da comparação
 
 	}
 	public function listar_autores()
-	{	$this->db->select('id,nome, email,user,estado,cidade');
+	{	$this->db->select('id,nome, email,user,estado,cidade,permissaoID');
 		$this->db->from('usuario'); //da tabela categoria
 		$this->db->order_by('nome', 'ASC');//coloca em ordem alfabetica as categorias do banco de dados
 
@@ -41,7 +41,7 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 
 	}
 
-	public function adicionar ($nome, $email, $user, $senha, $estado, $cidade)
+	public function adicionar ($nome, $email, $user, $senha, $estado, $cidade, $permissaoID)
 	{
 		$dados['nome'] = $nome;
 		$dados['email'] = $email;
@@ -49,6 +49,7 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 		$dados['user'] = $user;
 		$dados['senha'] = md5($senha);
 		$dados['estado'] = $estado;
+		$dados['permissaoID'] = $permissaoID;
 		$dados['cidade'] = $cidade;
 
 		return $this->db->insert('usuario', $dados);
@@ -59,16 +60,16 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 	}
 
 		public function listar_usuario($id)
-	{	$this->db->select('id,nome,email,user,estado,cidade');
+	{	$this->db->select('id,nome,email,user,estado,cidade,permissaoID');
 		$this->db->from('usuario'); //da tabela categoria
 		$this->db->where('md5(id)', $id); //compara com o id
 		return $this->db->get()->result(); //pega o resultado da comparação
 
 	}
-	public function alterar($nome, $email, $user, $senha, $id, $estado, $cidade){
+	public function alterar($nome, $email, $user, $senha, $id, $estado, $cidade,$permissaoID){
  	    $dados['nome'] = $nome;
 		$dados['email'] = $email;
-	
+		$dados['permissaoID']= $permissaoID;
 		$dados['user'] = $user;
 		$dados['senha'] = md5($senha);
 		$dados['estado'] = $estado;

@@ -1,10 +1,14 @@
    <div class="container">
+
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Entrar no sistema</h3>
+
+                        <h3 class="panel-title"  style="display: inline;">Entrar no sistema</h3>
+                     <a class="btn btn-sm btn-default " href="<?php echo base_url();  ?>" style="display: inline; margin-left:120px;" >Voltar</a>
                     </div>
+
                     <div class="panel-body">
                        
                     <?php   
@@ -25,7 +29,9 @@
                         echo form_close(); 
                         ?>
                     </div>
+
                 </div>
             </div>
+
         </div>
     </div>

@@ -32,7 +32,7 @@ class Usuarios extends CI_Controller
 
 	public function inserir()
 	{
-		if(!$this->session->userdata('logado'))
+		if(!$this->session->userdata('logado') )
 			redirect(base_url('admin/login'));
 		$this->load->model('usuarios_model',"modelusuarios");
 		$this->load->library('form_validation');
@@ -55,8 +55,9 @@ class Usuarios extends CI_Controller
 			$cidade= $this->input->post('txt-cidade');
 			$user= $this->input->post('txt-user');
 			$senha= $this->input->post('txt-senha');
+			$permissaoID = $this->input->post('txt-permissaoID');
 
-			if($this->modelusuarios->adicionar($nome, $email, $user, $senha,$estado,$cidade))
+			if($this->modelusuarios->adicionar($nome, $email, $user, $senha,$estado,$cidade,$permissaoID))
 				redirect(base_url('admin/usuarios'));
 			else
 				echo "Houve um erro no sistema";
@@ -81,14 +82,15 @@ class Usuarios extends CI_Controller
 	}
 	public function alterar($id)
 	{
-		if(!$this->session->userdata('logado'))
+		if(!$this->session->userdata('logado') || !$this->session->userdata('userlogado')->permissaoID==1 )
 			redirect(base_url('admin/login'));
 
 		$this->load->model('usuarios_model',"modelusuarios");
 		$dados['usuarios']=$this->modelusuarios->listar_usuario($id);
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= 'Usuarios';
-		
+
+
 		$this->load->view('backend/template/html-header', $dados);
 		$this->load->view('backend/template/template');
 		$this->load->view('backend/alterar-usuario');
@@ -129,8 +131,9 @@ class Usuarios extends CI_Controller
 			$user= $this->input->post('txt-user');
 			$senha= $this->input->post('txt-senha');
 			$id = $this->input->post('txt-id');
+			$permissaoID = $this->input->post('txt-permissaoID');
 
-			if($this->modelusuarios->alterar($nome, $email, $user, $senha, $id, $estado, $cidade))
+			if($this->modelusuarios->alterar($nome, $email, $user, $senha, $id, $estado, $cidade, $permissaoID))
 				redirect(base_url('admin/usuarios'));
 			else
 				echo "Houve um erro no sistema";
@@ -202,6 +205,7 @@ class Usuarios extends CI_Controller
 			$this->db->where('user', $usuario);
 			$this->db->where('senha', md5($senha) );
 			$userlogado = $this->db->get('usuario')->result();
+
 			 if (count($userlogado)==1) 
 			 {	
 			 	$dadosSessao['userlogado'] = $userlogado[0];
