@@ -23,10 +23,17 @@ class Usuarios extends CI_Controller
 
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= 'Usuários';
-
+		$dados['usuarioatual']= $this->session->userdata('userlogado');
+		
 		$this->load->view('backend/template/html-header', $dados);
 		$this->load->view('backend/template/template');
-		$this->load->view('backend/usuarios');
+		
+
+
+		if(!$this->session->userdata('userlogado')->permissaoID==1)
+			$this->load->view('backend/alterar-usuario');
+		else
+			$this->load->view('backend/usuarios');
 		$this->load->view('backend/template/html-footer');
 
 	}
@@ -92,7 +99,7 @@ class Usuarios extends CI_Controller
 		$dados['usuarios']=$this->modelusuarios->listar_usuario($id);
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= 'Usuarios';
-		$dados['usuarioatual']= $this->session->userdata('userlogado');
+		
 		$this->load->view('backend/template/html-header', $dados);
 		$this->load->view('backend/template/template');
 		$this->load->view('backend/alterar-usuario');
