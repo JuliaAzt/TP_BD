@@ -2,12 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuarios extends CI_Controller 
-	{ //Nome da classe com letra maiuscula
+{ //Nome da classe com letra maiuscula
 
 		public function __construct(){
 			parent::__construct();
 
+
 	}
+
 
 	public function index()
 	{	
@@ -90,10 +92,7 @@ class Usuarios extends CI_Controller
 		$dados['usuarios']=$this->modelusuarios->listar_usuario($id);
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= 'Usuarios';
-		if(!$this->session->userdata('userlogado')->permissaoID==1)
-			$dados['usuarioatual']= $this->session->userdata('userlogado');
-		else
-			$dados['usuarioatual']="";
+		$dados['usuarioatual']= $this->session->userdata('userlogado');
 		$this->load->view('backend/template/html-header', $dados);
 		$this->load->view('backend/template/template');
 		$this->load->view('backend/alterar-usuario');

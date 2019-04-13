@@ -16,7 +16,8 @@
                         <div class="panel-body">
                             <div class="row">
                               <?php 
-                              if(!$this->session->userdata('userlogado')->permissaoID==1) //Se o usuário atual não for admin
+                              if(!$this->session->userdata('userlogado')->permissaoID==1)
+                                { //Se o usuário atual não for admin
                                 ?>
                                 <div class="col-lg-12">
                                     
@@ -73,14 +74,16 @@
                                       <button type="submit" class="btn btn-default">Atualizar</button>
                                     <?php
                                     
-                                  }
+                                  
                                     echo form_close();
+
                                     ?>
 
 
                                 </div>
 
                                 <?php } else{ ?>
+                                
                                   <div class="col-lg-12">
                                     
                                     <?php echo validation_errors('<div class="alert alert-danger">','</div>');

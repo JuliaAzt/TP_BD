@@ -23,7 +23,7 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 		return ($this->db->get('categoria')->result()); //retorna as categorias
 	}
 
-	}
+	
 	
 	public function listar_professores()
 	{	
