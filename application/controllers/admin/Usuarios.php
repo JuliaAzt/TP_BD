@@ -17,7 +17,7 @@ class Usuarios extends CI_Controller
 		$this->load->library('table');
 
 		$this->load->model('usuarios_model','modelusuarios');
-		$dados['usuarios']= $this->modelusuarios->listar_autores();
+		$dados['usuarios']= $this->modelusuarios->listar_usuarios();
 
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= 'Usuários';
@@ -49,6 +49,7 @@ class Usuarios extends CI_Controller
 			$this->index();
 		else
 		{
+
 			$nome= $this->input->post('txt-nome');
 			$email= $this->input->post('txt-email');
 			$estado= $this->input->post('txt-estado');
@@ -82,15 +83,17 @@ class Usuarios extends CI_Controller
 	}
 	public function alterar($id)
 	{
-		if(!$this->session->userdata('logado') || !$this->session->userdata('userlogado')->permissaoID==1 )
+		if(!$this->session->userdata('logado')  )
 			redirect(base_url('admin/login'));
 
 		$this->load->model('usuarios_model',"modelusuarios");
 		$dados['usuarios']=$this->modelusuarios->listar_usuario($id);
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= 'Usuarios';
-
-
+		if(!$this->session->userdata('userlogado')->permissaoID==1)
+			$dados['usuarioatual']= $this->session->userdata('userlogado');
+		else
+			$dados['usuarioatual']="";
 		$this->load->view('backend/template/html-header', $dados);
 		$this->load->view('backend/template/template');
 		$this->load->view('backend/alterar-usuario');
@@ -140,41 +143,7 @@ class Usuarios extends CI_Controller
 		}
 	
 	}
-/*
-	public function nova_foto()
-	{
-		if(!$this->session->userdata('logado'))
-			redirect(base_url('admin/login'));
 
-		$this->load->model('usuarios_model',"modelusuarios");
-		$id = $this->input->post('id');
-		$config['upload_path']='./assets/frontend/img/usuarios';
-		$config['allowed_types']= 'jpg';
-		$config['file_name'] =  $id."jpg";
-		$config['overwrite']= TRUE;
-		$this->load->library('upload',$config);
-		if(!$this->upload->do_upload())
-			echo $this->upload->display_errors();
-		else
-		{
-			$config2['source_image']= './assets/frontend/img/usuarios/'.$id.'.jpg';
-			$config2['create_thumb']=FALSE;
-			$config2['width']=200;
-			$config2['height']=200;
-			$this->load->library('image_lib', $config2);
-			if($this->image_lib->resize()) 
-				 redirect(base_url('admin/usuarios/alterar/'.$id)); 
-				 else 
-				 	echo $this->image_lib->display_errors();
-				
-		}
-
-	
-
-	}
-
-
-*/
 
 	public function pag_login()
 	{
@@ -182,13 +151,12 @@ class Usuarios extends CI_Controller
 		$dados['titulo']= 'Painel de controle';
 		$dados['subtitulo']= ' - Entrar no sistema';
 
-
-
 		$this->load->view('backend/template/html-header', $dados);
 		$this->load->view('backend/login');
 		$this->load->view('backend/template/html-footer');
 
 	}
+
 	public function login()
 	{
 		

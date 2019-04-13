@@ -6,7 +6,6 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 	public $id;
 	public $nome;
 	public $email;
-
 	public $estado;
 	public $cidade;
 	public $user;
@@ -24,28 +23,42 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 		return ($this->db->get('categoria')->result()); //retorna as categorias
 	}
 
-
-	public function listar_autor($id)
-	{	$this->db->select('id,nome, email,user,estado,cidade,permissaoID');
-		$this->db->from('usuario'); //da tabela categoria
-		$this->db->where('id='.$id); //compara com o id
-		return $this->db->get()->result(); //pega o resultado da comparação
-
 	}
-	public function listar_autores()
-	{	$this->db->select('id,nome, email,user,estado,cidade,permissaoID');
-		$this->db->from('usuario'); //da tabela categoria
+	
+	public function listar_professores()
+	{	
+		$this->db->select('id,nome, email,user,estado,cidade,permissaoID');
+		$this->db->where('permissaoID', 2); 
+		$this->db->from('usuario'); 
 		$this->db->order_by('nome', 'ASC');//coloca em ordem alfabetica as categorias do banco de dados
 
 		return $this->db->get()->result(); //pega o resultado da comparação
 
 	}
 
+	public function listar_alunos()
+	{	$this->db->select('id,nome, email,user,estado,cidade,permissaoID');
+		$this->db->where('permissaoID', 3); 
+		$this->db->from('usuario'); 
+		$this->db->order_by('nome', 'ASC');//coloca em ordem alfabetica as categorias do banco de dados
+
+		return $this->db->get()->result(); //pega o resultado da comparação
+	}
+
+	public function listar_usuarios()
+	{	
+		$this->db->select('id,nome, email,user,estado,cidade,permissaoID');
+		$this->db->from('usuario'); 
+		$this->db->order_by('nome', 'ASC');//coloca em ordem alfabetica as categorias do banco de dados
+		return $this->db->get()->result(); //pega o resultado da comparação
+
+	}
+
+
 	public function adicionar ($nome, $email, $user, $senha, $estado, $cidade, $permissaoID)
 	{
 		$dados['nome'] = $nome;
 		$dados['email'] = $email;
-		
 		$dados['user'] = $user;
 		$dados['senha'] = md5($senha);
 		$dados['estado'] = $estado;
@@ -61,11 +74,12 @@ class Usuarios_model extends CI_Model { //Nome da classe com letra maiuscula
 
 		public function listar_usuario($id)
 	{	$this->db->select('id,nome,email,user,estado,cidade,permissaoID');
-		$this->db->from('usuario'); //da tabela categoria
-		$this->db->where('md5(id)', $id); //compara com o id
+		$this->db->from('usuario'); 
+		$this->db->where('md5(id)', $id); 
 		return $this->db->get()->result(); //pega o resultado da comparação
 
 	}
+
 	public function alterar($nome, $email, $user, $senha, $id, $estado, $cidade,$permissaoID){
  	    $dados['nome'] = $nome;
 		$dados['email'] = $email;
