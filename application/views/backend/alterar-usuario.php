@@ -1,17 +1,19 @@
-
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"><?php echo 'Administrar - '.$subtitulo?></h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+ <div class="row">
+   &nbsp;
+ </div>
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           <?php echo 'Alterar Usuario '?>
+                        <?php 
+                          if(!$this->session->userdata('userlogado')->permissaoID==1)                          
+                             echo "Editar meu perfil";
+                          else 
+                            echo 'Alterar Usuario';
+                         ?>
+                      
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -48,17 +50,7 @@
                                             <input type="text"  id="txt-user" name="txt-user" class="form-control"  value="<?php echo $usuarioatual->user   ?>">
                                      </div>
 
-                                      <div class="form-group">
-                                            <label id="txt-permissaoID">Permissão</label>
-
-                                            <select id="txt-permissaoID" name="txt-permissaoID" class="form-control" >
-                                              <option value="1">Administrador</option>
-                                              <option value="2">Professor</option>
-                                              <option value="3">Aluno</option>
-
-                                            </select>
-                                     </div>
-
+                                      
                                       <div class="form-group">
                                             <label id="txt-senha">Senha</label>
                                             <input type="password" id="txt-senha" name="txt-senha" class="form-control" >
@@ -83,7 +75,7 @@
                                 </div>
 
                                 <?php } else{ ?>
-                                
+
                                   <div class="col-lg-12">
                                     
                                     <?php echo validation_errors('<div class="alert alert-danger">','</div>');
