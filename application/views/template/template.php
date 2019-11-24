@@ -12,22 +12,20 @@
                 <a class="navbar-brand" href="./home">Painel Administrativo</a>
                 
             </div>
-            <span  class="navbar-brand " style="float: right;"> <?php echo $this->session->userdata('userlogado')->nome?></span>
+           
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<?php echo base_url('admin/categoria'); ?>"><i class="fa fa-sitemap fa-fw"></i> Categorias</a>
+                            <a href="<?php echo base_url(''); ?>"><i class="fa fa-sitemap fa-fw"></i> Outro Crud</a>
                         </li>
                        
                         <li>
-                            <a href="<?php echo base_url('admin/usuarios'); ?>"><i class="fa fa-wrench fa-fw"></i> Usuários</a>
+                            <a href="<?php echo base_url('passageiros'); ?>"><i class="fa fa-wrench fa-fw"></i> Usuários</a>
                         </li>
-                        <li>
-                            <a href="<?php echo base_url('admin/usuarios/logout'); ?>"><i class="fa fa-sign-out fa-fw"></i> Sair do Sistema</a>
-                        </li>
+                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
