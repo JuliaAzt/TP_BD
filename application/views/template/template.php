@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="./home">Painel Administrativo</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">Painel Administrativo</a>
                 
             </div>
            
@@ -19,7 +19,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<?php echo base_url(''); ?>"><i class="fa fa-sitemap fa-fw"></i> Outro Crud</a>
+                            <a href="<?php echo base_url(); ?>"><i class="fa fa-sitemap fa-fw"></i> Outro Crud</a>
                         </li>
                        
                         <li>
